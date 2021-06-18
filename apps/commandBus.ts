@@ -23,7 +23,14 @@ export class CommandBus {
 
     public async execute(type: string, payload?: any, project?: string): Promise<any> {
         if (project !== this.name) {
-            //executar no bullmq
+            //rxjs
+            return this.bullmq.addJob(project, type, payload)
+            //promise
+            return this.bullmq.addJobPromise(project, type, payload)
+            //callback
+            return new Promise((resolve) =>
+                this.bullmq.addJobCallback(resolve, project, type, payload),
+            )
         }
 
         const call = this.handlers.get(type)
