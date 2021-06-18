@@ -7521,15 +7521,6 @@ nest-router@^1.0.9:
   resolved "https://registry.yarnpkg.com/nest-router/-/nest-router-1.0.9.tgz#cbe814dadf90b765e0a5b77c562479d5d523a485"
   integrity sha512-ZyRdSVs9GczI+39B7tNXsxfBXQOYnEF6l/q2aLYG8wSEvRHRDXAlzZ1SIosDibM02pLahGkDNLFC+nZ8uzJGDQ==
 
-nestjs-queuebus@^1.2.10:
-  version "1.2.10"
-  resolved "https://registry.yarnpkg.com/nestjs-queuebus/-/nestjs-queuebus-1.2.10.tgz#9971418f55bc25b01897558a05648088b757699b"
-  integrity sha512-0j/SxjmOvFLUWAGye6jFvhS2RbEgwxAjqBxGEZuDzum9Cb1DAvzA+poGMosEK4wL2v22e3xXcrkSqIj0AHFAzQ==
-  dependencies:
-    reflect-metadata "^0.1.13"
-    rxjs "^7.1.0"
-    uuid "^8.3.2"
-
 next-tick@1, next-tick@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.1.0.tgz#1836ee30ad56d67ef281b22bd199f709449b35eb"
