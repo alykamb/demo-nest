@@ -1,15 +1,14 @@
-import { Controller, Post } from '@nestjs/common'
+import { Body, Controller, Post } from '@nestjs/common'
 
+import { CommandBus } from '../../commandBus'
 import { Hero } from '../../common/dtos/hero'
-import { AppService } from './app.service'
 
 @Controller('hero')
 export class AppController {
-    constructor(private readonly appService: AppService) {}
+    constructor(private readonly commandBus: CommandBus) {}
 
-    @Post()
-    public create(name: string): Hero {
-        const hero = new Hero(name)
-        return hero
+    @Post('create')
+    public create(@Body('name') name: string): Promise<Hero> {
+        return this.commandBus.execute('createHero', name)
     }
 }

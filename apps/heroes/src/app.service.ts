@@ -1,12 +1,15 @@
 import { Injectable } from '@nestjs/common'
 
+import { Hero } from '../../common/dtos/hero'
+
 @Injectable()
 export class AppService {
-<<<<<<< HEAD
-    getHello(): string {
-=======
     public getHello(): string {
->>>>>>> b597b0ca75d684ad2a44f1ae43b2f3e767aaa073
         return 'Hello World!'
+    }
+
+    public create(name: string): Hero {
+        const hero = new Hero(name)
+        return hero
     }
 }
