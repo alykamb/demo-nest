@@ -1,14 +1,25 @@
-import { Injectable } from '@nestjs/common'
+import { Inject, Injectable, OnModuleDestroy } from '@nestjs/common'
+import { Worker } from 'bullmq'
+import Redis from 'ioredis'
+
+import { REDIS, RedisAddress } from './redis'
+
+type GenericFunction = (...args: any[]) => any | Promise<any>
 
 @Injectable()
-export class BullMq {
-    private workers = new Map<string, any>()
+export class BullMq implements OnModuleDestroy {
+    private worker: Worker
+    private redis: Redis.Redis
 
-    // Todo: receber provider do Redis e criar instancia no construtor
-    /**
-     * addJob(name, payload, project)
-     */
-    /**
-     * Todo: createWorker(name, callback)
-     */
+    constructor(@Inject(REDIS) public redisAdress: RedisAddress) {
+        this.redis = new Redis(redisAdress)
+    }
+
+    public createWorker(name: string, callback: GenericFunction): void {
+        this.worker = new Worker(name, callback, { connection: this.redis })
+    }
+
+    public async onModuleDestroy(): Promise<void> {
+        await this.worker.close()
+    }
 }
