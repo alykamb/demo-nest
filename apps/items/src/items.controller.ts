@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common'
 
-import CommandBus from '../../commandBus'
+import { CommandBus } from '../../commandBus'
 import { Item } from '../../common/dtos/item'
 
 @Controller()
