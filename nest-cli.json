@@ -1,39 +1,39 @@
 {
-  "collection": "@nestjs/schematics",
-  "sourceRoot": "apps/heroes/src",
-  "monorepo": true,
-  "root": "apps/heroes",
-  "compilerOptions": {
-    "webpack": true,
-    "tsConfigPath": "apps/heroes/tsconfig.app.json"
-  },
-  "projects": {
-    "heroes": {
-      "type": "application",
-      "root": "apps/heroes",
-      "entryFile": "main",
-      "sourceRoot": "apps/heroes/src",
-      "compilerOptions": {
+    "collection": "@nestjs/schematics",
+    "sourceRoot": "apps/heroes/src",
+    "monorepo": true,
+    "root": "apps/heroes",
+    "compilerOptions": {
+        "webpack": true,
         "tsConfigPath": "apps/heroes/tsconfig.app.json"
-      }
     },
-    "monsters": {
-      "type": "application",
-      "root": "apps/monsters",
-      "entryFile": "main",
-      "sourceRoot": "apps/monsters/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/monsters/tsconfig.app.json"
-      }
-    },
-    "items": {
-      "type": "application",
-      "root": "apps/items",
-      "entryFile": "main",
-      "sourceRoot": "apps/items/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/items/tsconfig.app.json"
-      }
+    "projects": {
+        "heroes": {
+            "type": "application",
+            "root": "apps/heroes",
+            "entryFile": "main",
+            "sourceRoot": "apps/heroes/src",
+            "compilerOptions": {
+                "tsConfigPath": "apps/heroes/tsconfig.app.json"
+            }
+        },
+        "monsters": {
+            "type": "application",
+            "root": "apps/monsters",
+            "entryFile": "main",
+            "sourceRoot": "apps/monsters/src",
+            "compilerOptions": {
+                "tsConfigPath": "apps/monsters/tsconfig.app.json"
+            }
+        },
+        "items": {
+            "type": "application",
+            "root": "apps/items",
+            "entryFile": "main",
+            "sourceRoot": "apps/items/src",
+            "compilerOptions": {
+                "tsConfigPath": "apps/items/tsconfig.app.json"
+            }
+        }
     }
-  }
 }
