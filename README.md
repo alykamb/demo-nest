@@ -8,9 +8,15 @@ Commands:
 
 Heroes
 * [] Create hero
+    * [] Criar metodo post
+    * [] Criar command
 
 Items 
 * [] Create item
+    * [] Criar metodo post
+    * [] Criar command
 
 Monsters
 * [] Create monster
+    * [] Criar metodo post
+    * [] Criar command
