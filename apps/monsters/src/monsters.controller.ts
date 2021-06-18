@@ -7,7 +7,7 @@ export class MonstersController {
     constructor(private readonly monstersService: MonstersService) {}
 
     @Get()
-    getHello(): string {
+    public getHello(): string {
         return this.monstersService.getHello()
     }
 }
