@@ -1,4 +1,3 @@
 export class Item {
-    constructor(public name: string, public value: number) {
-    }
+    constructor(public name: string, public value: number) {}
 }
