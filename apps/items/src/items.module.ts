@@ -1,6 +1,6 @@
 import { Module, OnApplicationBootstrap } from '@nestjs/common'
 
-import CommandBus from '../../commandBus'
+import { CommandBus } from '../../commandBus'
 import { ItemsController } from './items.controller'
 import { ItemsService } from './items.service'
 

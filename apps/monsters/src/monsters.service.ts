@@ -4,7 +4,7 @@ import { Monster } from '../../common/dtos/monster'
 
 @Injectable()
 export class MonstersService {
-    public async createMonsterService(type: string): Promise<Monster> {
+    public createMonsterService(type: string): Monster {
         return new Monster(type)
     }
 }
