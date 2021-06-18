@@ -1,6 +1,8 @@
 import { Module, OnApplicationBootstrap } from '@nestjs/common'
 
+import { BullMq } from '../../bullMq.transport'
 import { CommandBus, NAME } from '../../commandBus'
+import { redisProvider } from '../../redis'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 
@@ -10,6 +12,8 @@ import { AppService } from './app.service'
     providers: [
         AppService,
         CommandBus,
+        BullMq,
+        redisProvider,
         {
             provide: NAME,
             useValue: 'Heroes',
