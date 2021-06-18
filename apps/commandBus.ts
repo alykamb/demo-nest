@@ -1,7 +1,9 @@
+import { Injectable } from '@nestjs/common'
 import { setTimeout } from 'timers/promises'
 
 type Call = (...args: any[]) => any | Promise<any>
 
+@Injectable()
 class CommandBus {
     private handlers = new Map<string, Call>()
     public registerHandler(type: string, call: Call): void {
@@ -26,5 +28,7 @@ function createThing(): any {
 commandBus.registerHandler('createThing', createThing)
 commandBus.registerHandler('somaUm', (n: number) => n + 1)
 
-void commandBus.execute('createThing', 1).then(console.log)
-void commandBus.execute('somaUm', 2).then(console.log)
+// void commandBus.execute('createThing', 1).then(console.log)
+// void commandBus.execute('somaUm', 2).then(console.log)
+
+export default CommandBus
