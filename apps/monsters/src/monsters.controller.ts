@@ -1,13 +1,14 @@
 import { Body, Controller, Post } from '@nestjs/common'
 
-import { MonstersService } from './monsters.service'
+import { CommandBus } from '../../commandBus'
+import { Monster } from '../../common/dtos/monster'
 
 @Controller('monster')
 export class MonstersController {
-    constructor(private readonly monstersService: MonstersService) {}
+    constructor(public commandBus: CommandBus) {}
 
-    @Post()
-    public createMonster(@Body('type') type: string): Promise<any> {
-        return this.monstersService.createMonsterService(type)
+    @Post('create-monster')
+    public createMonster(@Body('type') type: string): Promise<Monster> {
+        return this.commandBus.execute('createMonster', type)
     }
 }
