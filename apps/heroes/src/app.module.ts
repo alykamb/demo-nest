@@ -1,13 +1,20 @@
 import { Module, OnApplicationBootstrap } from '@nestjs/common'
 
-import { CommandBus } from '../../commandBus'
+import { CommandBus, NAME } from '../../commandBus'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 
 @Module({
     imports: [],
     controllers: [AppController],
-    providers: [AppService, CommandBus],
+    providers: [
+        AppService,
+        CommandBus,
+        {
+            provide: NAME,
+            useValue: 'Heroes',
+        },
+    ],
 })
 export class AppModule implements OnApplicationBootstrap {
     constructor(public appService: AppService, private commandBus: CommandBus) {}
