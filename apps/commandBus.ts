@@ -17,7 +17,9 @@ export class CommandBus {
         if (project !== this.name) {
             //executar no bullmq
         }
+
         const call = this.handlers.get(type)
+
         if (!call) {
             throw new Error('handler não existe')
         }
