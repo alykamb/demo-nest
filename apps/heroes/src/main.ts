@@ -1,4 +1,4 @@
-import '../../commandBus'
+import 'reflect-metadata'
 
 import { NestFactory } from '@nestjs/core'
 

@@ -5,6 +5,9 @@ import { CommandBus, NAME } from '../../commandBus'
 import { redisProvider } from '../../redis'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
+import { CreateHeroCommand, CreateHeroHandler } from './commands/createHero.command'
+
+// console.log(CreateHeroCommand.name)
 
 @Module({
     imports: [],
@@ -18,6 +21,7 @@ import { AppService } from './app.service'
             provide: NAME,
             useValue: 'Heroes',
         },
+        CreateHeroHandler,
     ],
 })
 export class AppModule implements OnApplicationBootstrap {
@@ -25,5 +29,7 @@ export class AppModule implements OnApplicationBootstrap {
 
     public onApplicationBootstrap(): void {
         this.commandBus.registerHandler('createHero', this.appService.create.bind(this.appService))
+
+        console.log(Reflect.getMetadata('command_handler_metadata', CreateHeroHandler))
     }
 }
