@@ -4,6 +4,6 @@ import { ItemsModule } from './items.module'
 
 async function bootstrap(): Promise<void> {
     const app = await NestFactory.create(ItemsModule)
-    await app.listen(3000)
+    await app.listen(3002)
 }
 void bootstrap()

@@ -4,6 +4,6 @@ import { MonstersModule } from './monsters.module'
 
 async function bootstrap(): Promise<void> {
     const app = await NestFactory.create(MonstersModule)
-    await app.listen(3000)
+    await app.listen(3001)
 }
 void bootstrap()

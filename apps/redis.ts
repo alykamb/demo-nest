@@ -8,7 +8,7 @@ export const REDIS = Symbol()
 export const redisProvider: Provider<RedisAddress> = {
     provide: REDIS,
     useValue: {
-        host: '192.168.0.100',
+        host: '192.168.1.4',
         port: 6379,
     },
 }
