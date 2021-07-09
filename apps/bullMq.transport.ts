@@ -92,7 +92,7 @@ export class BullMq implements OnModuleDestroy {
     }
 
     public createWorker(name: string, callback: GenericFunction): void {
-        this.worker = new Worker(name, callback, { connection: this.redis })
+        this.worker = new Worker(name, (job) => callback(job.data), { connection: this.redis })
     }
 
     public async onModuleDestroy(): Promise<void> {
