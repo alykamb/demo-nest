@@ -1,3 +1,4 @@
+import { Hero } from '../../../common/dtos/hero'
 import { commandHandler } from '../../../decorators'
 
 export class CreateHeroCommand {
@@ -6,7 +7,7 @@ export class CreateHeroCommand {
 
 @commandHandler(CreateHeroCommand)
 export class CreateHeroHandler {
-    public execute(command: CreateHeroCommand): void {
-        console.log(command)
+    public execute(command: CreateHeroCommand): Hero {
+        return new Hero(command.name)
     }
 }

@@ -4,6 +4,7 @@ import { ModulesContainer } from '@nestjs/core'
 import { BullMq } from '../../bullMq.transport'
 import { CommandBus, NAME } from '../../commandBus'
 import { COMMAND_METADATA } from '../../decorators'
+import { PROJECTS } from '../../projects'
 import { redisProvider } from '../../redis'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
@@ -19,7 +20,7 @@ import { CreateHeroHandler } from './commands/createHero.command'
         redisProvider,
         {
             provide: NAME,
-            useValue: 'Heroes',
+            useValue: PROJECTS.Heroes,
         },
         CreateHeroHandler,
     ],

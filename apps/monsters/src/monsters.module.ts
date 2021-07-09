@@ -1,11 +1,14 @@
 import { Module, OnApplicationBootstrap } from '@nestjs/common'
+import { ModulesContainer } from '@nestjs/core'
 
 import { BullMq } from '../../bullMq.transport'
 import { CommandBus, NAME } from '../../commandBus'
+import { COMMAND_METADATA } from '../../decorators'
+import { PROJECTS } from '../../projects'
 import { redisProvider } from '../../redis'
+import { CreateMonsterHandler } from './commands/createMonster.command'
 import { MonstersController } from './monsters.controller'
 import { MonstersService } from './monsters.service'
-
 @Module({
     imports: [],
     controllers: [MonstersController],
@@ -16,17 +19,45 @@ import { MonstersService } from './monsters.service'
         redisProvider,
         {
             provide: NAME,
-            useValue: 'Monsters',
+            useValue: PROJECTS.Monsters,
         },
+        CreateMonsterHandler,
     ],
 })
 export class MonstersModule implements OnApplicationBootstrap {
-    constructor(public monstersService: MonstersService, public commandBus: CommandBus) {}
+    constructor(private commandBus: CommandBus, private modulesContainer: ModulesContainer) {}
 
     public onApplicationBootstrap(): void {
-        this.commandBus.registerHandler(
-            'createMonster',
-            this.monstersService.createMonsterService.bind(this.monstersService),
-        )
+        const modules = Array.from(this.modulesContainer.values()) //pega todos modules do nest
+
+        const handlers: any[] = []
+        for (const module of modules) {
+            //para cara module
+            handlers.push(
+                ...Array.from(module.providers.values()) //pega todos os providers
+                    .filter((provider) => {
+                        return (
+                            provider?.instance?.constructor && //filtra providers que tem construtor(são classes)
+                            !!Reflect.getMetadata(COMMAND_METADATA, provider.instance.constructor) //e tem o nosso decorador
+                        )
+                    })
+                    .map((provider) => ({
+                        //mapeia os dados necessários
+                        instance: provider?.instance, //intância do commandHandler
+                        commandName: Reflect.getMetadata(
+                            //nome do command que ele executa
+                            COMMAND_METADATA,
+                            provider.instance.constructor,
+                        ),
+                    })),
+            )
+        }
+
+        //para cada um, registra no bus
+        handlers.forEach(({ instance, commandName }) => {
+            this.commandBus.registerHandler(commandName, (commandData) =>
+                instance.execute(commandData),
+            )
+        })
     }
 }
